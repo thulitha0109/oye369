@@ -17,33 +17,35 @@ export const Notification = ({ name, description, icon, color, time }: Notificat
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0, width: 0 });
   const elementRef = useRef<HTMLElement>(null);
 
+  // Calculate tooltip position
   useEffect(() => {
     if (hovered && elementRef.current) {
       const rect = elementRef.current.getBoundingClientRect();
       setTooltipPosition({
         x: rect.left,
-        y: rect.bottom + 8, // 8px gap below the notification
-        width: rect.width
+        y: rect.bottom + 8,
+        width: rect.width,
       });
     }
   }, [hovered]);
 
-  const tooltip = hovered && (
+  // Tooltip motion div
+  const tooltip = (
     <motion.div
+      key="tooltip"
       initial={{ opacity: 0, scale: 0.95, y: -10 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95, y: -10 }}
       transition={{ type: "spring", stiffness: 200, damping: 20 }}
       className="fixed z-[9999] rounded-lg bg-gray-800 px-3 py-2 text-xs text-white shadow-xl pointer-events-none"
       style={{
-        left: tooltipPosition.x + 16, // 16px margin from left
+        left: tooltipPosition.x + 16,
         top: tooltipPosition.y,
-        width: tooltipPosition.width - 32, // 32px total margin (16px each side)
-        maxWidth: '368px' // max-w-[400px] - 32px margin
+        width: tooltipPosition.width - 32,
+        maxWidth: "368px",
       }}
     >
       {description}
-      {/* Tooltip arrow pointing up */}
       <div className="absolute -top-1 left-6 w-2 h-2 bg-gray-800 rotate-45"></div>
     </motion.div>
   );
@@ -69,14 +71,17 @@ export const Notification = ({ name, description, icon, color, time }: Notificat
           </div>
         </div>
       </figure>
-      
-      {/* Portal tooltip to document body */}
-      {typeof document !== 'undefined' && hovered && tooltip && createPortal(
-        <AnimatePresence mode="wait">
-          {tooltip}
-        </AnimatePresence>, 
-        document.body
-      )}
+
+      {/* Portal tooltip */}
+      {typeof document !== "undefined" &&
+        createPortal(
+          (
+            <AnimatePresence mode="wait">
+              {hovered ? tooltip : null}
+            </AnimatePresence>
+          ) as React.ReactElement,
+          document.body
+        )}
     </>
   );
 };

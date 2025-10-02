@@ -61,7 +61,7 @@ const locations: ContactLocation[] = [
 
 type FormStatus = "idle" | "loading" | "success" | "error"
 
-export function Contact() {
+export default function Contact() {
   const [activeLocation, setActiveLocation] = React.useState<ContactLocation>(locations[0])
   const [formStatus, setFormStatus] = React.useState<FormStatus>("idle")
   const [formData, setFormData] = React.useState({
@@ -116,7 +116,7 @@ export function Contact() {
             Get in <span className="bg-gradient-to-r from-primary to-red-600 bg-clip-text text-transparent">Touch</span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto">
-            Have a project in mind? Let's discuss how we can help bring your vision to life
+            Have a project in mind? Let&apos;s discuss how we can help bring your vision to life
           </p>
         </motion.div>
 
@@ -137,15 +137,16 @@ export function Contact() {
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   className="flex flex-col items-center justify-center py-10 sm:py-12"
+                  aria-live="polite"
                 >
                   <CheckCircle2 className="w-14 h-14 sm:w-16 sm:h-16 text-green-500 mb-4" />
                   <h4 className="text-lg sm:text-xl font-semibold mb-2">Message Sent!</h4>
                   <p className="text-muted-foreground text-center text-sm sm:text-base">
-                    We'll get back to you within 24 hours.
+                    We&apos;ll get back to you within 24 hours.
                   </p>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6" aria-live="polite">
                   {/* Name */}
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -251,7 +252,7 @@ export function Contact() {
               )}
             </div>
 
-            {/* ✅ Quick Contact Cards - now only 2 and below form */}
+            {/* Quick Contact Cards */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -278,7 +279,7 @@ export function Contact() {
                 </div>
                 <h4 className="font-semibold mb-2">Email Us</h4>
                 <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">
-                  We'll respond within 24 hours
+                  We&apos;ll respond within 24 hours
                 </p>
                 <a href="mailto:info@company.lk" className="text-primary font-medium hover:underline text-sm sm:text-base">
                   info@company.lk

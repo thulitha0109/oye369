@@ -1,8 +1,10 @@
+"use client"
+
 import { buttonVariants } from "@/components/ui/button"
 import Link from "next/link"
 import { Github, Linkedin, Twitter, Mail, Instagram } from "lucide-react"
 
-export function AboutUsRight() {
+export default function AboutUsRight() {
   const teamMembers = [
     {
       name: "Naveen Dissanayaka",

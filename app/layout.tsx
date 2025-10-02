@@ -17,10 +17,10 @@ import GameCard from "./game-card/page"
 import { SiteFooter } from "@/components/site-footer"
 
 import ModernSlider from "@/components/Slider";
-import { AboutUsRight } from "./about-section/page"
+import  AboutUsRight  from "./about-section/page"
 import Partners  from "./companies/page"
-import { Portfolio } from "./portfolio-section/page"
-import { Contact } from "./contact-section/page"  
+import  Portfolio  from "./portfolio-section/page"
+import  Contact  from "./contact-section/page"  
 
 export const metadata: Metadata = {
   title: {
@@ -81,9 +81,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   {/* Add more cards if needed */}
                 </div>
 
-                <div className="container mx-auto mt-24 flex flex-col lg:flex-row justify-between items-start gap-8 px-4">
+                <div className="container mx-auto mt-24 flex flex-col lg:flex-row justify-between items-start gap-8 px-8">
                   {/* Partners Section */}
-                  <div className="w-full lg:w-1/2 flex justify-center">
+                  <div className=" w-full lg:w-1/2 flex justify-center">
                     <Partners />
                   </div>
 
